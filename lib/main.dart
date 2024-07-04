@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tic_tac_toe/screens/game.dart';
+import 'package:tic_tac_toe/screens/landing.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Tic Tac Toe",
-      home: GameScreen()
+      initialRoute: LandingScreen.route,
+      routes: {
+        LandingScreen.route: (_) => const LandingScreen(),
+        GameScreen.route: (_) => const GameScreen()
+      },
     );
   }
 }

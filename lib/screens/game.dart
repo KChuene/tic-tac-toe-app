@@ -3,6 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/constants/color.dart';
 
 class GameScreen extends StatefulWidget {
+  static const String route = "/game";
+  static var customFontStyle = const TextStyle(
+    fontFamily: "Arial Rounded MT",
+    fontSize: 28,
+    fontWeight: FontWeight.bold,
+    color: Colors.white
+  );
+
   const GameScreen({Key? key}) : super(key: key);
 
   State<GameScreen> createState() => _Game();
@@ -25,7 +33,7 @@ class _Game extends State<GameScreen> {
 
   void _startTimer() {
     // Configure the behaviour of the timer
-    timer = Timer.periodic(Duration(seconds: 1), (_) {
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
       // Invoke setState() every <Duration>
       setState(() {
         if(seconds > 0) {
@@ -52,7 +60,7 @@ class _Game extends State<GameScreen> {
     return Scaffold(
       backgroundColor: primaryColor,
       body: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             Expanded(
@@ -63,21 +71,26 @@ class _Game extends State<GameScreen> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.end, // Content won't hide behind status bar anymore
                     children: [
-                      const Text(
-                        'Player O', 
-                        style: TextStyle(
-                          fontSize: 30, 
-                          fontWeight: FontWeight.bold, 
-                          color: Colors.white
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 6),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 2),
+                          borderRadius: BorderRadius.circular(23)
+                        ),
+                        child: const Text(
+                          'Player O', 
+                          style: TextStyle(
+                            fontFamily: "Arial",
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
+                          )
                         )
                       ),
+                      const SizedBox(height: 5),
                       Text(
                         oScore.toString(), 
-                        style: const TextStyle(
-                          fontSize: 28, 
-                          fontWeight: FontWeight.bold, 
-                          color: Colors.white
-                        )
+                        style: GameScreen.customFontStyle
                       )
                     ],
                   ),
@@ -85,27 +98,33 @@ class _Game extends State<GameScreen> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.end, // Content won't hide behind status bar anymore
                     children: [
-                      const Text(
-                        'Player X', 
-                        style: TextStyle(
-                          fontSize: 30, 
-                          fontWeight: FontWeight.bold, 
-                          color: Colors.white
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 6),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 2),
+                          borderRadius: BorderRadius.circular(23)
+                        ),
+                        child: const Text(
+                          'Player X', 
+                          style: TextStyle(
+                            fontFamily: "Arial",
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
+                          )
                         )
                       ),
+                      const SizedBox(height: 5),
                       Text(
                         xScore.toString(), 
-                        style: const TextStyle(
-                          fontSize: 28, 
-                          fontWeight: FontWeight.bold, 
-                          color: Colors.white
-                        )
+                        style: GameScreen.customFontStyle
                       )
                     ],
                   )
                 ],
               )
             ),
+            const SizedBox(height: 20),
             Expanded(
               flex: 3,
               child:  GridView.builder(
@@ -136,9 +155,9 @@ class _Game extends State<GameScreen> {
                         child: Text(
                           arrayMappingXO[_tdRow(index)][_tdCol(index)],
                           style: TextStyle(
-                            fontFamily: 'Agency FB',
-                            fontSize: 60,
+                            fontFamily: "Arial",
                             fontWeight: FontWeight.bold,
+                            fontSize: 55,
                             color: (_isWinBlock(index))? Colors.white: primaryColor 
                           )
                         ),
@@ -155,11 +174,7 @@ class _Game extends State<GameScreen> {
                 children: [
                   Text(
                     endResult,
-                    style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white
-                    ),
+                    style: GameScreen.customFontStyle
                   ),
                   const SizedBox(height: 15),
                   _buildTimer()
